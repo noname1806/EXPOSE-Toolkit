@@ -1,4 +1,4 @@
-# EXPOSE-Toolkit: Artifact for "SIG: Recovering Scam Infrastructure Graphs from Victim Complaint Intelligence"
+# EXPOSE-Toolkit: Artifact for "Recovering Scam Infrastructure Graphs from Victim Complaint Intelligence"
 
 Artifact accompanying the ACM CCS 2026 submission. This toolkit
 reproduces every quantitative claim in the paper (Tables 1–10,
