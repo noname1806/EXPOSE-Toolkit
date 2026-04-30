@@ -1,0 +1,3 @@
+Manual labeling results (100 disagreements)
+Our pipeline correct: 74/100 (74.0%)
+Platform correct: 24/100 (24.0%)

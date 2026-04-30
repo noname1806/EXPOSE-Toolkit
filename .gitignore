@@ -1,0 +1,10 @@
+output/
+_logs/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.idea/
+.vscode/
+*.zip
+files (1)/

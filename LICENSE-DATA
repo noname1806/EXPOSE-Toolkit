@@ -1,0 +1,27 @@
+The dataset `results.jsonl` packaged with this artifact is released
+under the Creative Commons Attribution 4.0 International License
+(CC-BY-4.0).
+
+    https://creativecommons.org/licenses/by/4.0/
+
+SPDX-License-Identifier: CC-BY-4.0
+
+Provenance
+----------
+All complaint records in `results.jsonl` are derived from publicly
+posted pages on 800notes.com. No private, authenticated, or
+login-gated content is included. No user was contacted, deceived,
+or observed to produce this dataset.
+
+Phone numbers are retained in E.164 form. Poster display names
+appear only where the poster voluntarily chose a public display
+name on 800notes.com. If you are a poster and wish your content
+removed, contact the corresponding author listed in README.md.
+
+Attribution
+-----------
+If you use this dataset in published work, please cite:
+
+    <anonymized for review>
+    "SIG: Recovering Scam Infrastructure Graphs from Victim
+    Complaint Intelligence." ACM CCS 2026.

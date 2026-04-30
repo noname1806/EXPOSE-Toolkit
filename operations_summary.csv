@@ -1,0 +1,13 @@
+operation_id,campaign_count,phone_count,area_codes,top_call_type,link_layers,shadow_hubs,domains,campaign_ids
+OP_000,7,23,11,Scam suspicion,"{""shared_carrier"": 6, ""sig_edge"": 3}",+13044541294;+13072929758,,TC_0008;TC_0021;TC_0063;TC_0064;TC_0092;TC_0121;TC_0138
+OP_001,3,15,6,Scam suspicion,"{""shared_carrier"": 3}",+18449882564,,TC_0006;TC_0045;TC_0075
+OP_002,3,8,7,Fax,"{""sig_edge"": 2}",,,TC_0040;TC_0054;TC_0094
+OP_003,3,7,7,Unwanted,"{""sig_edge"": 2}",,,TC_0041;TC_0176;TC_0200
+OP_004,2,16,3,Telemarketer,"{""callback_hub"": 1}",+18772003699;+18773960066,,TC_0004;TC_0013
+OP_005,2,6,6,Scam suspicion,"{""sig_edge"": 1}",+18669590927,,TC_0026;TC_0181
+OP_006,2,6,5,Scam suspicion,"{""callback_hub"": 1}",+18334872573;+18334872576;+18334872577,,TC_0052;TC_0053
+OP_007,2,4,4,Text message,"{""sig_edge"": 1}",,,TC_0078;TC_0111
+OP_008,2,4,4,Scam suspicion,"{""sig_edge"": 1}",,,TC_0113;TC_0141
+OP_009,2,4,2,Telemarketer,"{""callback_hub"": 1}",+18556820740,,TC_0125;TC_0126
+OP_010,2,4,4,Scam suspicion,"{""shared_carrier"": 1}",,,TC_0137;TC_0173
+OP_011,2,4,3,Scam suspicion,"{""sig_edge"": 1}",,,TC_0159;TC_0174

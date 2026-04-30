@@ -1,0 +1,9 @@
+output/
+_logs/
+__pycache__/
+*.pyc
+.git/
+.DS_Store
+files (1)/
+files (1).zip
+*.zip

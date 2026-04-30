@@ -1,0 +1,54 @@
+======================================================================
+SIG CONSTRUCTION REPORT
+======================================================================
+Date: 2026-04-02 16:12
+Input: 93,008 records, 97,093 comments
+
+EDGE EXTRACTION
+----------------------------------------
+  Raw mentions in comments: 17,948
+  Self-references removed:  8,192
+  Valid directed edges:     9,756
+  Unique (source, target):  8,542
+
+GRAPH
+----------------------------------------
+  Nodes: 9,316
+    Corpus (reported):      3,643
+    Shadow (from text only): 5,673
+
+  Edges pointing to shadow: 7,916 / 9,756 (81.1%)
+
+CONNECTED COMPONENTS
+----------------------------------------
+  Total components:  2,449
+  Largest:           416 nodes
+  Median:            2 nodes
+  Size >=   2: 2,449 components
+  Size >=   5: 333 components
+  Size >=  10: 101 components
+  Size >=  50: 9 components
+  Size >= 100: 5 components
+
+THREE-LAYER ARCHITECTURE
+----------------------------------------
+  Frontline (corpus, not mentioned): 92,065
+  Bridge (corpus AND mentioned):     943
+  Shadow (mentioned, not corpus):    5,673
+
+BASELINE COMPARISON
+----------------------------------------
+  SIG mean H_T:       0.787
+  Random baseline:    0.651
+  Area-code baseline: 0.646
+  SIG vs Random: t=3.627, p=0.00057
+  SIG vs AC:     t=2.527, p=0.013973
+
+======================================================================
+NEXT STEPS
+======================================================================
+1. Open sig_component_eval.csv
+2. For each of the 50 rows, read sample_text_1/2/3
+3. In 'is_real_campaign' column, write: yes / no / unclear
+4. Report precision = yes_count / (yes_count + no_count)
+======================================================================

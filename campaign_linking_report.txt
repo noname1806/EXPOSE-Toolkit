@@ -1,0 +1,122 @@
+======================================================================
+CAMPAIGN LINKING SYSTEM REPORT
+======================================================================
+Date: 2026-04-02 14:24
+Input: 93,008 records
+SIG participants: 3,643
+Twilio records: 666
+
+STAGE 1: TEXT-SIMILARITY CAMPAIGNS
+----------------------------------------
+  Method: TF-IDF + cosine similarity (threshold=0.8)
+  Features: 10000 max, bigrams, sublinear TF
+  Campaigns found: 203
+  Largest: 26 phones
+  Median: 2 phones
+
+STAGE 2: MULTI-LAYER LINKING
+----------------------------------------
+  sig_edge            : 11 links
+  shared_carrier      : 10 links
+  callback_hub        : 3 links
+  TOTAL               : 24 links
+  Operations found: 12
+
+OPERATIONS (sorted by size)
+----------------------------------------
+
+  OP_000: 7 campaigns, 23 phones, 11 area codes
+    Call type: Scam suspicion
+    Links: {'shared_carrier': 6, 'sig_edge': 3}
+    Shadow hubs: 2
+    [TC_0021, 4ph]: "Shane Loan scam again, this making it the 27th call since August 18th (only skipping Sundays, Labor Day & September 26th"
+    [TC_0138, 2ph]: "Shane Call received at 2:16 PM on 10/31/2025, call was rejected based on area code.  As expected, I received an alert on"
+
+  OP_001: 3 campaigns, 15 phones, 6 area codes
+    Call type: Scam suspicion
+    Links: {'shared_carrier': 3}
+    Shadow hubs: 1
+    [TC_0045, 3ph]: "Will Call came in on 657-867-5062, didn't answer, and message left for an IRS audit scam requesting call back to this nu"
+    [TC_0006, 10ph]: "Iowan another cover number for google business scam robo giving an opt out number of 619-935-1051 ... caller ID showed ""
+
+  OP_002: 3 campaigns, 8 phones, 7 area codes
+    Call type: Fax
+    Links: {'sig_edge': 2}
+    Shadow hubs: 0
+    [TC_0040, 3ph]: "Oriley Kentucky Health Insurance - info@yourcoverage.net 800-491-5500, 270-812-6667, 833-536-0586"
+    [TC_0054, 3ph]: "Oriley Ally Commerical, small Business Funding, FAX ad"
+
+  OP_003: 3 campaigns, 7 phones, 7 area codes
+    Call type: Unwanted
+    Links: {'sig_edge': 2}
+    Shadow hubs: 0
+    [TC_0176, 2ph]: "Theresa Fraudulent ROBOCALL that is for a SCAM loan application that is FAKE and this company does not exist. This is a "
+    [TC_0200, 2ph]: "Mike-D Got another unsolicited pending loan approval call, which I did not apply for.  Of course, all they would need is"
+
+  OP_004: 2 campaigns, 16 phones, 3 area codes
+    Call type: Telemarketer
+    Links: {'callback_hub': 1}
+    Shadow hubs: 2
+    [TC_0004, 11ph]: "Keybolt Classic message from a different phone number, "Hi, this is Jennifer. I’m a senior underwriter on the debt resol"
+    [TC_0013, 5ph]: "Manda male voice, a lot of noise in the background) "Hello. This is Marcos from the funding department. It looks like yo"
+
+  OP_005: 2 campaigns, 6 phones, 6 area codes
+    Call type: Scam suspicion
+    Links: {'sig_edge': 1}
+    Shadow hubs: 1
+    [TC_0026, 4ph]: "Shane | 1 reply Call received at 6:04 PM on 10/9/2025, the call was rejected when I saw the area code (expecting it to b"
+    [TC_0181, 2ph]: "Brian retyped by me. Originally posted to phone number 855-909-0590 This is a scam loan call.  the calls come from diffe"
+
+  OP_006: 2 campaigns, 6 phones, 5 area codes
+    Call type: Scam suspicion
+    Links: {'callback_hub': 1}
+    Shadow hubs: 3
+    [TC_0053, 3ph]: "RavenMad loan processing department robo scam call back numbers 833-487-2573 or 833-487-2576 or 833-487-2577 or 833-588-"
+    [TC_0052, 3ph]: "RavenMad +15188260465 loan processing department robo scam call back number 833-487-2573"
+
+  OP_007: 2 campaigns, 4 phones, 4 area codes
+    Call type: Text message
+    Links: {'sig_edge': 1}
+    Shadow hubs: 0
+    [TC_0111, 2ph]: "Gary Sent unwanted group text claiming to be an Indeed recruiter"
+    [TC_0078, 2ph]: "Gary Call-back number referenced in an unwanted text from (229) 722-8136, claiming to be an Amazon recruiter"
+
+  OP_008: 2 campaigns, 4 phones, 4 area codes
+    Call type: Scam suspicion
+    Links: {'sig_edge': 1}
+    Shadow hubs: 0
+    [TC_0141, 2ph]: "Winston These people call every weekday.  They do not leave a message.  When I call back from another number they claim "
+    [TC_0113, 2ph]: "Steve Maverick They are not really AT&T (they are a scam call center in India [no calls during the Diwali holiday]). Ver"
+
+  OP_009: 2 campaigns, 4 phones, 2 area codes
+    Call type: Telemarketer
+    Links: {'callback_hub': 1}
+    Shadow hubs: 1
+    [TC_0126, 2ph]: "Manda (female voice) . This is Lauren calling from the approval department regarding your prequalified personal loan for"
+    [TC_0125, 2ph]: "Keybolt The caller does not leave a business name and has a file for me when I have never contacted this type of busines"
+
+  OP_010: 2 campaigns, 4 phones, 4 area codes
+    Call type: Scam suspicion
+    Links: {'shared_carrier': 1}
+    Shadow hubs: 0
+    [TC_0137, 2ph]: "CL Received this message that started out as what sounded like an Indian lady. Then the message finished with a female r"
+    [TC_0173, 2ph]: "AJ Fraudulent robocall claiming you have a tax debt and must call 888-516-0672 back to resolve the issue. "Hi, it's Dean"
+
+  OP_011: 2 campaigns, 4 phones, 3 area codes
+    Call type: Scam suspicion
+    Links: {'sig_edge': 1}
+    Shadow hubs: 0
+    [TC_0174, 2ph]: "ScoobiFreeBSD I received a scam email on 2026/01/22 at 12:35 EST containing a fake invoice for a 4-year McAfee "Ultimate"
+    [TC_0159, 2ph]: "ScoobiFreeBSD I received a scam email on 2026/01/27 at 09:35 EST containing a fake invoice for a McAfee 48-month Antivir"
+
+======================================================================
+NEXT STEPS
+======================================================================
+1. Open campaign_linking_eval.csv
+2. For each operation, read sample_text_1 and sample_text_2
+3. In the 'correct' column, write:
+   'yes'     = campaigns clearly belong to same operation
+   'no'      = campaigns are unrelated (false link)
+   'partial' = some campaigns linked correctly, others not
+4. Save and report precision = yes_count / total
+======================================================================
