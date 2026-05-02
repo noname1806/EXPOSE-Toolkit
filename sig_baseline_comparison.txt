@@ -1,9 +1,0 @@
-SIG COMPONENT HOMOGENEITY vs BASELINES
-==================================================
-
-SIG components (top 50):  mean H_T = 0.787 (n=33)
-Random grouping:         mean H_T = 0.651 (n=1000)
-Area-code grouping:      mean H_T = 0.646 (n=451)
-
-SIG vs Random:  t=3.627, p=0.00057
-SIG vs AC:      t=2.527, p=0.013973

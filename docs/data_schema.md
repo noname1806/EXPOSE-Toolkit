@@ -1,7 +1,7 @@
 # Input data schema (`results.jsonl`)
 
-The SIG-Toolkit operates over any telephony-complaint corpus that exposes
-**three fields per complaint**:
+The EXPOSE-Toolkit operates over any telephony-complaint corpus that
+exposes **three fields per complaint**:
 
 1. a reported telephony identifier (normalized to E.164),
 2. one or more free-text narratives associated with that identifier, and
@@ -10,12 +10,12 @@ The SIG-Toolkit operates over any telephony-complaint corpus that exposes
 This is the "minimal input contract" referenced in the paper (§3).
 To run the pipeline on a different complaint source (Reddit threads,
 FTC CSN extracts, consumeraffairs, etc.), convert it to the JSONL
-schema below. No other change is needed.
+schema below.  No other change is needed.
 
 ## File format
 
-A newline-delimited JSON file. One record per line. One record per
-reported identifier. UTF-8.
+A newline-delimited JSON file.  One record per line.  One record per
+reported identifier.  UTF-8.
 
 ## Record schema
 
@@ -31,8 +31,9 @@ reported identifier. UTF-8.
   "total_pages":  1,                     // optional
   "dominant_call_type": "Debt collector",// OPTIONAL weak platform label.
                                          //   Used only for descriptive reports
-                                         //   and streaming-hub consistency; if
-                                         //   absent, pass "Unknown".
+                                         //   and streaming-alert source-type
+                                         //   consistency; if absent, pass
+                                         //   "Unknown".
   "call_type_breakdown": {"Debt collector": 1}, // optional, informational
   "comments": [                          // REQUIRED. Array of complaint narratives.
     {
@@ -44,8 +45,8 @@ reported identifier. UTF-8.
       "text":            "Noelle claiming to be Lisa ... call 855.865.1878 or text 920.717.4451.",
                                          // REQUIRED. Free-text narrative.
       "mentioned_numbers": [             // OPTIONAL but recommended.
-                                         //   If absent, the NLP stage will
-                                         //   extract mentions from `text`.
+                                         //   If absent, Stage 1 will extract
+                                         //   mentions directly from `text`.
         {
           "number":  "855-865-1878",     // display form
           "e164":    "+18558651878",     // normalized E.164
@@ -61,42 +62,43 @@ reported identifier. UTF-8.
 ## Context labels (`mentioned_numbers[*].context`)
 
 The platform parser used to produce the released corpus emits the
-strings below. The pipeline maps them to the five-role labels defined
-in the paper:
+strings below.  EXPOSE Stage 1 maps them to the four-label scheme of
+paper §3.1, plus a `provided` carry-through:
 
-| Platform string                | Internal role | Meaning                                                 |
-| ------------------------------ | ------------- | ------------------------------------------------------- |
-| `callback number`              | `callback`    | Victim was told to call this number.                    |
-| `spoofed caller id`            | `spoofed_cid` | Number appeared as caller-ID but is not the real source.|
-| `text/sms number`              | `sms`         | Text/SMS channel number.                                |
-| `mentioned in text message`    | `sms`         | (older platform variant) same as above.                 |
-| `mentioned in comment`         | `mention`     | Generic co-mention in narrative.                        |
-| *(any other string)*           | `mention`     | Safe default; treated as generic mention.               |
+| Platform string                | Internal label | Meaning                                                  |
+| ------------------------------ | -------------- | -------------------------------------------------------- |
+| `callback number`              | `callback`     | Victim was told to call this number.                     |
+| `spoofed caller id`            | `spoofed`      | Number appeared as caller-ID but is not the real source. |
+| `text/sms number`              | `sms`          | Text/SMS channel number.                                 |
+| `mentioned in text message`    | `sms`          | (older platform variant) same as above.                  |
+| `number they provided`         | `provided`     | Number given during the interaction.                     |
+| `mentioned in comment`         | `mention`      | Generic co-mention in narrative.                         |
+| *(any other string)*           | `mention`      | Safe default; treated as generic mention.                |
 
 If your corpus does not pre-extract `mentioned_numbers`, omit the
-field entirely. The NLP stage (`sig_nlp_pipeline.py`) will extract
-mentions from the `text` field using the same regex + windowed
-context classifier described in the paper (§3.1). The platform
+field entirely.  Stage 1 (`stage1_extract.py`) will extract mentions
+from the `text` field using the regex + 120-character windowed
+classifier described in paper §3.1 and Appendix C.  The platform
 parser is treated as a weak label, not ground truth.
 
-## Required vs optional fields
+## Required vs. optional fields
 
 | Field                              | Required? | Notes                                                  |
 | ---------------------------------- | --------- | ------------------------------------------------------ |
-| `e164`                             | yes       | Primary key. Must be `+1XXXXXXXXXX` (11 digits).       |
+| `e164`                             | yes       | Primary key.  Must be `+1XXXXXXXXXX` (11 digits).      |
 | `comments`                         | yes       | Array; empty is allowed but the record is then unused. |
-| `comments[*].date`                 | yes       | `YYYY-MM-DD`. Needed for streaming split.              |
+| `comments[*].date`                 | yes       | `YYYY-MM-DD`.  Needed for the streaming alert.         |
 | `comments[*].text`                 | yes       | Free-text narrative.                                   |
-| `comments[*].mentioned_numbers`    | no        | If absent, NLP stage extracts them from `text`.        |
-| `dominant_call_type`               | no        | Used only for report tables and hub consistency.       |
+| `comments[*].mentioned_numbers`    | no        | If absent, Stage 1 extracts from `text`.               |
+| `dominant_call_type`               | no        | Used only for report tables and source-type consistency.|
 
 All other fields are informational and may be omitted.
 
 ## Optional external enrichment
 
-`campaign_linking.py` reads an optional `twilio_lookup_results.jsonl`
-from the working directory to activate the carrier-overlap linkage
-layer (Layer C, §6.3 σ_carrier). Each line is:
+Stage 4 (`stage4_campaigns_ecosystems.py`) reads
+`output/carrier_lookup.jsonl` (produced by Stage 3) to activate the
+`sigma_carrier` indicator described in paper §6.3.  Each line is:
 
 ```jsonc
 {
@@ -109,14 +111,14 @@ layer (Layer C, §6.3 σ_carrier). Each line is:
 }
 ```
 
-Pass it to the orchestrator via `--twilio /path/to/twilio_lookup_results.jsonl`.
-If the file is not provided, Layer C is silently skipped and the
-other three layers (σ_hub, σ_edge, shared-domain) still run.
+If the file is not present, `sigma_carrier` is silently skipped; the
+two stronger indicators (`sigma_hub`, `sigma_edge`) still run and
+produce the primary ecosystem graph.
 
 ## Validating a new corpus
 
 Before running the full pipeline on a new corpus, run a cheap sanity
-check. A minimal validator is:
+check:
 
 ```bash
 python -c "

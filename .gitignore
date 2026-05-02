@@ -8,3 +8,16 @@ __pycache__/
 .vscode/
 *.zip
 files (1)/
+
+# FTC DNC bulk files are public data but not redistributed with this
+# artifact (see paper §A, README §"Optional external services").
+# Reviewers fetch them via stage4_ftc_cross_check.py --download.
+ftc_dnc_complaints.csv
+ftc_daily_csv/
+
+# Local Twilio credentials (never commit these).
+.env
+twilio.env
+
+# pdftotext temp dump
+paper.txt
